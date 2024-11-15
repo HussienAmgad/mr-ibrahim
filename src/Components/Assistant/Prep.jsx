@@ -14,11 +14,11 @@ export default function Prep() {
 
   const fetchData = async () => {
     try {
-      const response1 = await fetch('http://localhost:8080/showprep1');
+      const response1 = await fetch('https://mr-ibrahem-server.vercel.app/showprep1');
       const data1 = await response1.json();
-      const response2 = await fetch('http://localhost:8080/showprep2');
+      const response2 = await fetch('https://mr-ibrahem-server.vercel.app/showprep2');
       const data2 = await response2.json();
-      const response3 = await fetch('http://localhost:8080/showprep3');
+      const response3 = await fetch('https://mr-ibrahem-server.vercel.app/showprep3');
       const data3 = await response3.json();
       setStudents([...data1, ...data2, ...data3]);
       console.log([...data1, ...data2, ...data3]);
@@ -39,13 +39,13 @@ export default function Prep() {
     try {
       // جلب البيانات بناءً على الصف
       if (grade === "الصف الأول الثانوي") {
-        const response1 = await fetch(`http://localhost:8080/showprep1/${id}`);
+        const response1 = await fetch(`https://mr-ibrahem-server.vercel.app/showprep1/${id}`);
         data = await response1.json();
       } else if (grade === "الصف الثاني الثانوي") {
-        const response2 = await fetch(`http://localhost:8080/showprep2/${id}`);
+        const response2 = await fetch(`https://mr-ibrahem-server.vercel.app/showprep2/${id}`);
         data = await response2.json();
       } else if (grade === "الصف الثالث الثانوي") {
-        const response3 = await fetch(`http://localhost:8080/showprep3/${id}`);
+        const response3 = await fetch(`https://mr-ibrahem-server.vercel.app/showprep3/${id}`);
         data = await response3.json();
       }
   

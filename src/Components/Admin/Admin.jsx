@@ -12,7 +12,7 @@ export default function Admin() {
   // دالة لجلب بيانات الطلاب من السيرفر
   const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:8080');
+      const response = await fetch('https://mr-ibrahem-server.vercel.app/');
       const data = await response.json();
       setStudents(data);
     } catch (error) {

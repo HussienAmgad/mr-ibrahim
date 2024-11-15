@@ -21,7 +21,7 @@ const AddStudent = () => {
     };
 
     try {
-      const response = await axios.post('http://localhost:8080/addstudent', newStudent);
+      const response = await axios.post('https://mr-ibrahem-server.vercel.app/addstudent', newStudent);
       setMessage(`تم إضافة الطالب بنجاح: ${response.data.student.name}`);
       // إعادة تعيين الحقول بعد الإضافة
       setName('');
