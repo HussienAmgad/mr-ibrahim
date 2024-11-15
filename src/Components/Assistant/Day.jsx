@@ -13,7 +13,7 @@ export default function Day() {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('https://mr-ibrahem-server.vercel.app/');
+            const response = await axios.get('https://mr-ibrahim-server.vercel.app/');
             setStudents(response.data);
         } catch (error) {
             setError("هناك خطأ في جلب البيانات");
@@ -53,13 +53,13 @@ export default function Day() {
         let url;
         switch (selectedGrade) {
             case "الصف الأول الثانوي":
-                url = "https://mr-ibrahem-server.vercel.app/prep1";
+                url = "https://mr-ibrahim-server.vercel.app/prep1";
                 break;
             case "الصف الثاني الثانوي":
-                url = "https://mr-ibrahem-server.vercel.app/prep2";
+                url = "https://mr-ibrahim-server.vercel.app/prep2";
                 break;
             case "الصف الثالث الثانوي":
-                url = "https://mr-ibrahem-server.vercel.app/prep3";
+                url = "https://mr-ibrahim-server.vercel.app/prep3";
                 break;
             default:
                 alert("يرجى اختيار الصف لتقفيل اليوم.");
