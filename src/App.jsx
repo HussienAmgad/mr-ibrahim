@@ -77,7 +77,7 @@ function App() {
       ),
     },
     {
-      path: "/edit",
+      path: "/editstudent",
       element: (
         <ProdectRout>
           <Edit />

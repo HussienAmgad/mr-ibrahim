@@ -1,5 +1,6 @@
+import { Button } from 'flowbite-react';
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 export default function Assistant() {
   const [students, setStudents] = useState([]);
@@ -8,6 +9,8 @@ export default function Assistant() {
   const [isCenterOpen, setIsCenterOpen] = useState(false);
   const [selectedGrade, setSelectedGrade] = useState(null);
   const [selectedCenter, setSelectedCenter] = useState(null);
+  const navigate = useNavigate(); // تعريف useNavigate
+
   
   const fetchData = async () => {
     try {
@@ -41,6 +44,11 @@ export default function Assistant() {
     setIsCenterOpen(false);
   };
 
+  function signout() {
+    localStorage.clear()
+    navigate("/");
+  }
+
   const toggleGradeDropdown = () => setIsGradeOpen(!isGradeOpen);
   const toggleCenterDropdown = () => setIsCenterOpen(!isCenterOpen);
 
@@ -53,6 +61,7 @@ export default function Assistant() {
             <NavLink to="/addstudent" className="text-white bg-green-600 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5">إضافة طالب</NavLink>
             <NavLink to="/day" className="text-white bg-indigo-600 hover:bg-indigo-700 font-medium rounded-lg text-sm px-5 py-2.5">بداية يوم</NavLink>
             <NavLink to="/prep" className="text-white bg-teal-600 hover:bg-teal-700 font-medium rounded-lg text-sm px-5 py-2.5">جميع السنوات</NavLink>
+            <Button onClick={signout} className="text-white bg-teal-600 hover:bg-teal-700 font-medium rounded-lg text-sm px-5 py-2.5">Sign out</Button>
 
             <div className="relative inline-block text-left w-64">
               <button onClick={toggleGradeDropdown} className="inline-flex justify-between w-full px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded-lg shadow-md hover:bg-gray-300 focus:outline-none">

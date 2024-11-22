@@ -55,6 +55,30 @@ export default function Prep() {
     }
   }
 
+  async function Edit(id, grade, navigate) {
+    try {
+      let data;
+      if (grade === "الصف الأول الثانوي") {
+        const response1 = await fetch(`https://mr-ibrahim-server.vercel.app/showprep1/${id}`);
+        data = await response1.json();
+      } else if (grade === "الصف الثاني الثانوي") {
+        const response2 = await fetch(`https://mr-ibrahim-server.vercel.app/showprep2/${id}`);
+        data = await response2.json();
+      } else if (grade === "الصف الثالث الثانوي") {
+        const response3 = await fetch(`https://mr-ibrahim-server.vercel.app/showprep3/${id}`);
+        data = await response3.json();
+      }
+  
+      if (data) {
+        // قم بتوجيه المستخدم إلى صفحة التعديل مع تمرير البيانات المطلوبة
+        navigate("/editstudent", { state: { data } });
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+  
+
   const filterByGradeAndCenter = () => {
     return students.filter(student => {
       const gradeMatch = selectedGrade ? student.grade === selectedGrade : true;
