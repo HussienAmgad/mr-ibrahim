@@ -6,7 +6,7 @@ export default function Choose() {
         <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 p-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
                 <NavLink 
-                    to="Loginassistant" 
+                    to="Loginstudent" 
                     className="group block max-w-sm p-6 bg-white border border-gray-200 rounded-xl shadow-lg transform transition-all duration-500 hover:scale-105 hover:bg-indigo-600 hover:text-white hover:shadow-2xl dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
                 >
                     <div className="text-center">

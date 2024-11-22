@@ -11,6 +11,7 @@ export default function LoginStudent() {
       const { data } = await axios.post('https://mr-ibrahim-server.vercel.app/loginstudent', information);
       console.log("Response data:", data);
       localStorage.setItem('userToken', data.token);
+      localStorage.setItem('Data', JSON.stringify(data));
       setTimeout(() => {
         navigate("/student"); // الانتقال إلى الصفحة الرئيسية بعد تسجيل الدخول بنجاح
       }, 2000);
