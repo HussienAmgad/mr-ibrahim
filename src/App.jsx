@@ -5,6 +5,7 @@ import Addstudent from './Components/Assistant/Addstudent';
 import Day from './Components/Assistant/Day';
 import Prep from './Components/Assistant/Prep';
 import Oneday from './Components/Assistant/Oneday';
+import Edit from './Components/Assistant/Edit';
 
 function App() {
   const routers = createBrowserRouter([
@@ -19,6 +20,10 @@ function App() {
     {
       path: "day", 
       element: <Day />,
+    },
+    {
+      path: "edit", 
+      element: <Edit />,
     },
     {
       path: "oneday", 

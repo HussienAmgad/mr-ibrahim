@@ -20,14 +20,19 @@ export default function Prep() {
       const data2 = await response2.json();
       const response3 = await fetch('https://mr-ibrahim-server.vercel.app/showprep3');
       const data3 = await response3.json();
-      setStudents([...data1, ...data2, ...data3]);
-      console.log([...data1, ...data2, ...data3]);
-      console.log(students);
-      
+  
+      // دمج البيانات وترتيبها من الأحدث إلى الأقدم بناءً على التاريخ
+      const combinedData = [...data1, ...data2, ...data3].sort((a, b) => {
+        return new Date(b.date) - new Date(a.date);
+      });
+  
+      setStudents(combinedData);
+      console.log(combinedData);
     } catch (error) {
       setError("هناك خطأ في جلب البيانات");
     }
   };
+  
 
   useEffect(() => {
     fetchData();
@@ -35,7 +40,7 @@ export default function Prep() {
 
   async function open(id, grade, navigate) {
     let data; // تعريف متغير لتخزين البيانات
-  
+
     try {
       // جلب البيانات بناءً على الصف
       if (grade === "الصف الأول الثانوي") {
@@ -48,7 +53,7 @@ export default function Prep() {
         const response3 = await fetch(`https://mr-ibrahim-server.vercel.app/showprep3/${id}`);
         data = await response3.json();
       }
-  
+
       // الانتقال إلى صفحة oneday وتمرير البيانات
       if (data) {
         navigate("/oneday", { state: { data } }); // الانتقال مع تمرير البيانات باستخدام state
@@ -57,7 +62,31 @@ export default function Prep() {
       console.error("Error:", error); // عرض الخطأ في حال حدوث مشكلة
     }
   }
-  
+  async function Edit(id, grade, navigate) {
+    let data; // تعريف متغير لتخزين البيانات
+
+    try {
+      // جلب البيانات بناءً على الصف
+      if (grade === "الصف الأول الثانوي") {
+        const response1 = await fetch(`https://mr-ibrahim-server.vercel.app/showprep1/${id}`);
+        data = await response1.json();
+      } else if (grade === "الصف الثاني الثانوي") {
+        const response2 = await fetch(`https://mr-ibrahim-server.vercel.app/showprep2/${id}`);
+        data = await response2.json();
+      } else if (grade === "الصف الثالث الثانوي") {
+        const response3 = await fetch(`https://mr-ibrahim-server.vercel.app/showprep3/${id}`);
+        data = await response3.json();
+      }
+
+      // الانتقال إلى صفحة oneday وتمرير البيانات
+      if (data) {
+        navigate("/edit", { state: { data } }); // الانتقال مع تمرير البيانات باستخدام state
+      }
+    } catch (error) {
+      console.error("Error:", error); // عرض الخطأ في حال حدوث مشكلة
+    }
+  }
+
 
   const filterByGradeAndCenter = () => {
     return students.filter(student => {
@@ -174,7 +203,12 @@ export default function Prep() {
           {filterByGradeAndCenter().length > 0 ? (
             filterByGradeAndCenter().map((student) => (
               <tr key={student.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors duration-200">
-                <td className="px-6 py-4">{student.date}</td>
+                <td className="px-6 py-4">
+                  {new Date(student.date).toLocaleString("ar-EG", {
+                    dateStyle: "full",
+                    timeStyle: "short",
+                  })}
+                </td>
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                   {student.grade}
                 </th>
@@ -182,7 +216,8 @@ export default function Prep() {
                   <span className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{student.center}</span>
                 </td>
                 <td className="px-6 py-4">
-                  <button onClick={() => open(student._id,student.grade,navigate)} className="px-2 py-1 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full">فتح</button>
+                  <button onClick={() => open(student._id, student.grade, navigate)} className="px-2 py-1 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full">فتح</button>
+                  <button onClick={() => Edit(student._id, student.grade, navigate)} className="px-2 py-1 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full">تعديل</button>
                 </td>
               </tr>
             ))
