@@ -54,7 +54,7 @@ export default function Edit() {
     
         const collection = grade; // Ensure grade is available and used here
         const id = data._id; // Ensure data is valid before using its properties
-        const url = `https://mr-ibrahim-server.vercel.app//update/${collection}/${id}`; // Correct the URL formation
+        const url = `https://mr-ibrahim-server.vercel.app/update/${collection}/${id}`; // Correct the URL formation
     
         const filteredStudents = filterByGradeAndCenter().map((student) => ({
             ...student,
