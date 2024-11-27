@@ -107,7 +107,7 @@ export default function Prep() {
         <caption className="p-5 text-2xl font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-md mb-4">
           <div className="flex justify-between items-center">
             <div className="flex space-x-4">
-              <NavLink to="addstudent" className="text-white bg-blue-800 hover:bg-blue-900 px-5 py-2 rounded-lg transition-all">إضافة طالب</NavLink>
+              <NavLink to="/addstudent" className="text-white bg-blue-800 hover:bg-blue-900 px-5 py-2 rounded-lg transition-all">إضافة طالب</NavLink>
               <NavLink to="/day" className="text-white bg-blue-800 hover:bg-blue-900 px-5 py-2 rounded-lg transition-all">بداية يوم</NavLink>
             </div>
             <button onClick={() => navigate(-1)} className="bg-gray-600 hover:bg-gray-700 text-white py-2 px-4 rounded-lg transition-all">رجوع</button>

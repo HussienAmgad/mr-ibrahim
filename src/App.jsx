@@ -13,6 +13,7 @@ import LoginStudent from './Components/Student/LoginStudent';
 import Student from './Components/Student/Student';
 import LoginAssistant from './Components/Assistant/LoginAssistant';
 import LoginMr from './Components/Admin/LoginMr';
+import Cert from './Components/Admin/Cert';
 
 function App() {
   const routers = createBrowserRouter([
@@ -82,6 +83,12 @@ function App() {
         <ProdectRout>
           <Edit />
         </ProdectRout>
+      ),
+    },
+    {
+      path: "/cert",
+      element: (
+          <Cert />
       ),
     },
     {
