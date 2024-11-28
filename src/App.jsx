@@ -115,9 +115,12 @@ function App() {
       <div>
         <Helmet>
           <title>موقع مستر إبراهيم زيدان</title> {/* العنوان الذي يظهر في التبويب */}
+          <link rel="icon" type="image/png" href="https://mr-ibrahim.vercel.app/icon512_maskable.png" /> {/* استبدل الرابط بالرابط الخاص بالصورة */}
           <meta name="description" content="موقع مستر إبراهيم زيدان يقدم محتوى مميز في مختلف المجالات." /> {/* الوصف الذي يظهر في محركات البحث */}
           <meta name="keywords" content="Mr ibrahem, Mr ibrahim, مستر ابراهيم, مستر ابراهيم زيدان, ابراهيم زيدان, موقع مستر ابراهيم زيدان, موقع ابراهيم زيدان" /> {/* الكلمات المفتاحية */}
-          <meta name="author" content="مستر إبراهيم زيدان" /> {/* اسم الكاتب أو صاحب الموقع */}
+          <meta name="keywords" content=" مستر ابراهيم, مستر ابراهيم زيدان, ابراهيم زيدان, موقع مستر ابراهيم زيدان, موقع ابراهيم زيدان" /> {/* الكلمات المفتاحية */}
+          <meta name="keywords" content="إبراهيم زيدان, مستر ابراهيم" /> {/* الكلمات المفتاحية */}
+          <meta name="author" content="إبراهيم زيدان" /> {/* اسم الكاتب أو صاحب الموقع */}
           <meta property="og:title" content="موقع مستر إبراهيم زيدان" /> {/* عنوان الموقع عند المشاركة على وسائل التواصل الاجتماعي */}
           <meta property="og:description" content="موقع مستر إبراهيم زيدان يقدم محتوى مميز في مختلف المجالات." /> {/* وصف الموقع عند المشاركة على وسائل التواصل الاجتماعي */}
           <meta property="og:image" content="https://mr-ibrahim.vercel.app/icon512_maskable.png" /> {/* صورة مميزة للموقع عند المشاركة */}
