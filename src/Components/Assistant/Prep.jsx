@@ -97,8 +97,8 @@ export default function Prep() {
     setIsCenterOpen(false);
   };
 
-  const toggleGradeDropdown = () => setIsGradeOpen(!isGradeOpen);
-  const toggleCenterDropdown = () => setIsCenterOpen(!isCenterOpen);
+  // const toggleGradeDropdown = () => setIsGradeOpen(!isGradeOpen);
+  // const toggleCenterDropdown = () => setIsCenterOpen(!isCenterOpen);
 
   return (
     <div className="relative overflow-x-auto shadow-xl bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 p-6">
