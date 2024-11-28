@@ -115,6 +115,7 @@ function App() {
       <div>
         <Helmet>
           <title>موقع مستر إبراهيم زيدان</title> {/* العنوان الذي يظهر في التبويب */}
+          <meta property="og:site_name" content="موقع مستر إبراهيم زيدان" />
           <link rel="icon" type="image/png" href="https://mr-ibrahim.vercel.app/icon512_maskable.png" /> {/* استبدل الرابط بالرابط الخاص بالصورة */}
           <meta name="description" content="موقع مستر إبراهيم زيدان يقدم محتوى مميز في مختلف المجالات." /> {/* الوصف الذي يظهر في محركات البحث */}
           <meta name="keywords" content="Mr ibrahem, Mr ibrahim, مستر ابراهيم, مستر ابراهيم زيدان, ابراهيم زيدان, موقع مستر ابراهيم زيدان, موقع ابراهيم زيدان" /> {/* الكلمات المفتاحية */}
