@@ -116,15 +116,16 @@ function App() {
         <Helmet>
           <title>موقع مستر إبراهيم زيدان</title> {/* العنوان الذي يظهر في التبويب */}
           <meta property="og:site_name" content="موقع مستر إبراهيم زيدان" />
-          <link rel="icon" type="image/png" href="https://mr-ibrahim.vercel.app/icon512_maskable.png" /> {/* استبدل الرابط بالرابط الخاص بالصورة */}
+          <link rel="icon" type="image/png" href="/public/icon512_rounded.png" /> {/* استبدل الرابط بالرابط الخاص بالصورة */}
           <meta name="description" content="موقع مستر إبراهيم زيدان يقدم محتوى مميز في مختلف المجالات." /> {/* الوصف الذي يظهر في محركات البحث */}
+          <meta name="robots" content="index, follow"/>
           <meta name="keywords" content="Mr ibrahem, Mr ibrahim, مستر ابراهيم, مستر ابراهيم زيدان, ابراهيم زيدان, موقع مستر ابراهيم زيدان, موقع ابراهيم زيدان" /> {/* الكلمات المفتاحية */}
           <meta name="keywords" content=" مستر ابراهيم, مستر ابراهيم زيدان, ابراهيم زيدان, موقع مستر ابراهيم زيدان, موقع ابراهيم زيدان" /> {/* الكلمات المفتاحية */}
           <meta name="keywords" content="إبراهيم زيدان, مستر ابراهيم" /> {/* الكلمات المفتاحية */}
           <meta name="author" content="إبراهيم زيدان" /> {/* اسم الكاتب أو صاحب الموقع */}
           <meta property="og:title" content="موقع مستر إبراهيم زيدان" /> {/* عنوان الموقع عند المشاركة على وسائل التواصل الاجتماعي */}
           <meta property="og:description" content="موقع مستر إبراهيم زيدان يقدم محتوى مميز في مختلف المجالات." /> {/* وصف الموقع عند المشاركة على وسائل التواصل الاجتماعي */}
-          <meta property="og:image" content="https://mr-ibrahim.vercel.app/icon512_maskable.png" /> {/* صورة مميزة للموقع عند المشاركة */}
+          <meta property="og:image" content="/public/icon512_maskable.png" /> {/* صورة مميزة للموقع عند المشاركة */}
         </Helmet>
         <h1>مرحبًا بك في موقع مستر إبراهيم زيدان!</h1>
       </div>
