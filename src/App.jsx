@@ -1,5 +1,6 @@
 import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import Assistant from './Components/Assistant/Assistant';
 import Addstudent from './Components/Assistant/Addstudent';
 import Day from './Components/Assistant/Day';
