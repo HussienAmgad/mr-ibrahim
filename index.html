@@ -14,7 +14,6 @@
     <meta property="og:title" content="موقع مستر إبراهيم زيدان" />
     <meta property="og:description" content="موقع مستر إبراهيم زيدان يقدم محتوى مميز في مختلف المجالات." />
     <meta property="og:image" content="/public/icon512_maskable.png" />
-
     <title>إبراهيم زيدان</title>
 
     <!-- Google tag (gtag.js) -->
@@ -25,6 +24,12 @@
       gtag('js', new Date());
       gtag('config', 'G-5ZC1Z75QW1');
     </script>
+    <script>
+      if (window.location.pathname !== "/") {
+        window.location.replace("/");
+      }
+    </script>
+    
   </head>
   <body>
     <div id="root"></div>
