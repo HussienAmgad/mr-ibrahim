@@ -11,7 +11,7 @@ export default function Assistant() {
   const [selectedCenter, setSelectedCenter] = useState(null);
   const navigate = useNavigate(); // تعريف useNavigate
 
-  
+
   const fetchData = async () => {
     try {
       const response = await fetch('https://mr-ibrahim-server.vercel.app/');
@@ -53,15 +53,11 @@ export default function Assistant() {
   const toggleCenterDropdown = () => setIsCenterOpen(!isCenterOpen);
 
   return (
-    <div className="relative overflow-x-auto shadow-lg bg-white dark:bg-gray-900 p-6">
+    <div className="relative overflow-x-auto shadow-lg bg-white dark:bg-gray-900 h-full">
       {error && <div className="text-red-500 p-4">{error}</div>}
       <table className="min-w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <caption className="p-5 text-xl font-semibold text-gray-900 bg-gradient-to-r from-blue-500 to-teal-400 dark:text-white dark:bg-gray-800 border-b">
-          <div className="flex justify-between items-center">
-            <NavLink to="/addstudent" className="text-white bg-green-600 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5">إضافة طالب</NavLink>
-            <NavLink to="/day" className="text-white bg-indigo-600 hover:bg-indigo-700 font-medium rounded-lg text-sm px-5 py-2.5">بداية يوم</NavLink>
-            <NavLink to="/prep" className="text-white bg-teal-600 hover:bg-teal-700 font-medium rounded-lg text-sm px-5 py-2.5">جميع السنوات</NavLink>
-            <Button onClick={signout} className="text-white bg-teal-600 hover:bg-teal-700 font-medium rounded-lg text-sm px-5 py-2.5">Sign out</Button>
+        <caption className="p-5 text-xl font-semibold text-gray-900 bg-gradient-to-r bg-white dark:bg-teal-900 border-b">
+          <div className="flex justify-center items-center">
 
             <div className="relative inline-block text-left w-64">
               <button onClick={toggleGradeDropdown} className="inline-flex justify-between w-full px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded-lg shadow-md hover:bg-gray-300 focus:outline-none">

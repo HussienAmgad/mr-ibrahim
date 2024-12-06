@@ -15,104 +15,112 @@ import LoginAssistant from './Components/Assistant/LoginAssistant';
 import LoginMr from './Components/Admin/LoginMr';
 import Cert from './Components/Admin/Cert';
 import { Helmet } from 'react-helmet';
+import Navbar from './Components/Navbar/Navbar';
+import Layout from './Components/Layout/Layout';
 
 function App() {
   const routers = createBrowserRouter([
     {
-      path: "/",
-      element:
-        <ProdectRout2>
-          <Choose />
-        </ProdectRout2>
-    },
-    {
-      path: "/Loginstudent",
-      element:
-        <ProdectRout2>
-          <LoginStudent />
-        </ProdectRout2>
-    },
-    {
-      path: "/Loginassistant",
-      element:
-        <ProdectRout2>
-          <LoginAssistant />
-        </ProdectRout2>
-    },
-    {
-      path: "/LoginMr",
-      element:
-        <ProdectRout2>
-          <LoginMr />
-        </ProdectRout2>
-    },
-    {
-      path: "/assistant",
-      element: (
-        <ProdectRout>
-          <Assistant />
-        </ProdectRout>
-      ),
-    },
-    {
-      path: "/addstudent",
-      element: (
-        <ProdectRout>
-          <Addstudent />
-        </ProdectRout>
-      ),
-    },
-    {
-      path: "/student",
-      element: (
-        <ProdectRout>
-          <Student />
-        </ProdectRout>
-      ),
-    },
-    {
-      path: "/day",
-      element: (
-        <ProdectRout>
-          <Day />
-        </ProdectRout>
-      ),
-    },
-    {
-      path: "/editstudent",
-      element: (
-        <ProdectRout>
-          <Edit />
-        </ProdectRout>
-      ),
-    },
-    {
-      path: "/cert",
-      element: (
-        <Cert />
-      ),
-    },
-    {
-      path: "/oneday",
-      element: (
-        <ProdectRout>
-          <Oneday />
-        </ProdectRout>
-      ),
-    },
-    {
-      path: "/prep",
-      element: (
-        <ProdectRout>
-          <Prep />
-        </ProdectRout>
-      ),
-    },
+      path: "", element: <Layout />, children: [
+        {
+          path: "/",
+          element:
+            <ProdectRout2>
+              <Choose />
+            </ProdectRout2>
+        },
+        {
+          path: "/Loginstudent",
+          element:
+            <ProdectRout2>
+              <LoginStudent />
+            </ProdectRout2>
+        },
+        {
+          path: "/Loginassistant",
+          element:
+            <ProdectRout2>
+              <LoginAssistant />
+            </ProdectRout2>
+        },
+        {
+          path: "/LoginMr",
+          element:
+            <ProdectRout2>
+              <LoginMr />
+            </ProdectRout2>
+        },
+        {
+          path: "/assistant",
+          element: (
+            <ProdectRout>
+              <Assistant />
+            </ProdectRout>
+          ),
+        },
+        {
+          path: "/addstudent",
+          element: (
+            <ProdectRout>
+              <Addstudent />
+            </ProdectRout>
+          ),
+        },
+        {
+          path: "/student",
+          element: (
+            <ProdectRout>
+              <Student />
+            </ProdectRout>
+          ),
+        },
+        {
+          path: "/day",
+          element: (
+            <ProdectRout>
+              <Day />
+            </ProdectRout>
+          ),
+        },
+        {
+          path: "/editstudent",
+          element: (
+            <ProdectRout>
+              <Edit />
+            </ProdectRout>
+          ),
+        },
+        {
+          path: "/cert",
+          element: (
+            <Cert />
+          ),
+        },
+        {
+          path: "/oneday",
+          element: (
+            <ProdectRout>
+              <Oneday />
+            </ProdectRout>
+          ),
+        },
+        {
+          path: "/prep",
+          element: (
+            <ProdectRout>
+              <Prep />
+            </ProdectRout>
+          ),
+        },
+      ]
+    }
+
   ]);
 
   return (
     <>
       <div>
+      <RouterProvider router={routers} />
         <Helmet>
           <title>موقع مستر إبراهيم زيدان</title> {/* العنوان الذي يظهر في التبويب */}
           <meta property="og:site_name" content="موقع مستر إبراهيم زيدان" />
@@ -127,9 +135,7 @@ function App() {
           <meta property="og:description" content="موقع مستر إبراهيم زيدان يقدم محتوى مميز في مختلف المجالات." /> {/* وصف الموقع عند المشاركة على وسائل التواصل الاجتماعي */}
           <meta property="og:image" content="/public/icon512_maskable.png" /> {/* صورة مميزة للموقع عند المشاركة */}
         </Helmet>
-        <h1>مرحبًا بك في موقع مستر إبراهيم زيدان!</h1>
       </div>
-      <RouterProvider router={routers} />
     </>
   );
 }
