@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import DarkLightToggle from '../DarkLightToggle/DarkLightToggle';
 import { NavLink, useNavigate } from 'react-router-dom';
+import fail from '../../assets/icon512_rounded.png'
 import {jwtDecode} from 'jwt-decode';
 
 export default function Navbar() {
@@ -42,7 +43,7 @@ export default function Navbar() {
         <nav className="bg-white border-gray-200 dark:bg-gray-900">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <a href="" className="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src="/src/assets/icon512_rounded.png" className="h-10" alt="Flowbite Logo" />
+                    <img src={fail} className="h-10" alt="Flowbite Logo" />
                 </a>
                 <button
                     onClick={toggleMenu}
