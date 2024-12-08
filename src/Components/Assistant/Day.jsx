@@ -6,6 +6,7 @@ import { Formik, Form } from 'formik';
 export default function Day() {
     const [students, setStudents] = useState([]);
     const [error, setError] = useState(null);
+    const [attendance, setAttendance] = useState(0);
     const [isGradeOpen, setIsGradeOpen] = useState(false);
     const [isCenterOpen, setIsCenterOpen] = useState(false);
     const [selectedGrade, setSelectedGrade] = useState(null);
@@ -65,21 +66,22 @@ export default function Day() {
                 alert("يرجى اختيار الصف لتقفيل اليوم.");
                 return;
         }
-    
+
         const filteredStudents = filterByGradeAndCenter().map((student) => ({
             ...student,
             Exam: student.Exam || "", // تأكد من أن الامتحان لا يكون null
             Attendance: student.Attendance === true ? true : false, // تأكد من أن الحضور يكون Boolean
             Homework: student.Homework === true ? true : false, // تأكد من أن الواجب يكون Boolean
         }));
-    
+
         const data = {
             date: new Date().toISOString(),
             grade: selectedGrade,
             center: selectedCenter,
+            attendance: attendance,
             students: filteredStudents,
         };
-    
+
         try {
             await axios.post(url, data);
             alert("تم تقفيل اليوم بنجاح.");
@@ -87,7 +89,23 @@ export default function Day() {
             setError("حدث خطأ أثناء تقفيل اليوم.");
         }
     };
-    
+
+    function totalattendance() {
+        let total = 0;
+
+        const filteredStudents = filterByGradeAndCenter();
+
+        // حساب عدد الحاضرين
+        for (let student of filteredStudents) {
+            if (student.Attendance) {
+                total += 1;
+            }
+        }
+        setAttendance(total);
+    }
+
+
+
 
     const toggleGradeDropdown = () => setIsGradeOpen(!isGradeOpen);
     const toggleCenterDropdown = () => setIsCenterOpen(!isCenterOpen);
@@ -107,6 +125,7 @@ export default function Day() {
                             {({ values }) => (
                                 <Form>
                                     <button
+                                        onClick={totalattendance}
                                         type="submit"
                                         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                                     >
@@ -116,7 +135,7 @@ export default function Day() {
                             )}
                         </Formik>
                         <NavLink
-                        to="/"
+                            to="/"
                             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                         >
                             الرجوع الي الطلاب

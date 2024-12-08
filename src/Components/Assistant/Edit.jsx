@@ -9,11 +9,12 @@ export default function Edit() {
     const [grade, setGrade] = useState(null);
     const [center, setCenter] = useState(null);
     const [selectedGrade, setSelectedGrade] = useState(null);
+    const [attendance, setAttendance] = useState(0);
     const [selectedCenter, setSelectedCenter] = useState(null);
     const location = useLocation();
     const data = location.state?.data; // Receiving data from the previous component
 
-    useEffect(() => {     
+    useEffect(() => {
         console.log(data);
         setCenter(data.center)
         if (data) {
@@ -51,25 +52,25 @@ export default function Edit() {
             setError("الصف غير مُعرف");
             return; // Exit the function early if grade is not available
         }
-    
+
         const collection = grade; // Ensure grade is available and used here
         const id = data._id; // Ensure data is valid before using its properties
         const url = `https://mr-ibrahim-server.vercel.app/update/${collection}/${id}`; // Correct the URL formation
-    
+
         const filteredStudents = filterByGradeAndCenter().map((student) => ({
             ...student,
             Exam: student.Exam || "",
             Attendance: !!student.Attendance,
             Homework: !!student.Homework,
         }));
-    
+
         const requestData = {
             date: data.date,
             grade: data.grade,
             center: data.center,
             students: filteredStudents,
         };
-    
+
         try {
             // Use await here to wait for the axios post request to complete
             await axios.put(url, requestData);
@@ -78,7 +79,21 @@ export default function Edit() {
             setError("حدث خطأ أثناء تقفيل اليوم.");
         }
     };
-    
+
+    function totalattendance() {
+        let total = 0;
+
+        const filteredStudents = filterByGradeAndCenter();
+
+        // حساب عدد الحاضرين
+        for (let student of filteredStudents) {
+            if (student.Attendance) {
+                total += 1;
+            }
+        }
+        setAttendance(total);
+    }
+
 
     return (
         <div className="relative overflow-x-auto shadow-md">
@@ -96,6 +111,7 @@ export default function Edit() {
                             {() => (
                                 <Form>
                                     <button
+                                        onClick={totalattendance}
                                         type="submit"
                                         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                                     >
