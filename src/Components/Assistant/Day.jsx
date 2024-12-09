@@ -7,6 +7,7 @@ export default function Day() {
     const [students, setStudents] = useState([]);
     const [error, setError] = useState(null);
     const [attendance, setAttendance] = useState(0);
+    const [Profit, setProfit] = useState(0);
     const [isGradeOpen, setIsGradeOpen] = useState(false);
     const [isCenterOpen, setIsCenterOpen] = useState(false);
     const [selectedGrade, setSelectedGrade] = useState(null);
@@ -102,6 +103,7 @@ export default function Day() {
             }
         }
         setAttendance(total);
+        setProfit(attendance * 30);
     }
 
 
