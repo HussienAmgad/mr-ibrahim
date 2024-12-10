@@ -8,11 +8,11 @@ export default function LoginMr() {
   async function Login(information) {
     console.log("Hello", information);
     try {
-      const { data } = await axios.post('https://mr-ibrahim-server.vercel.app/Loginassistant', information);
+      const { data } = await axios.post('https://mr-ibrahim-server.vercel.app/loginmr', information);
       console.log("Response data:", data);
       localStorage.setItem('userToken', data.token);
       setTimeout(() => {
-        navigate("/assistant");
+        navigate("/admin");
       }, 2000);
     } catch (error) {
       const errorMessage = error.response?.data?.message || "Login failed!";

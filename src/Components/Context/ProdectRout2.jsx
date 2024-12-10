@@ -18,8 +18,8 @@ export default function ProdectRout2({ children }) {
             return <Navigate to={"/student"} />;
         } else if (decodedToken.statues === "assist") {
             return <Navigate to={"/assistant"} />;
-        } else {
-            return <Navigate to={"/assistant"} />;
+        } else if (decodedToken.statues === "admin") {
+            return <Navigate to={"/admin"} />;
 
         }
           

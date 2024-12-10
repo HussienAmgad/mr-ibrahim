@@ -11,6 +11,8 @@ export default {
     extend: {},
   },
   plugins: [
-    flowbitePlugin
+    flowbitePlugin({
+      charts: true, // تفعيل الرسوم البيانية
+    }),
   ],
 };

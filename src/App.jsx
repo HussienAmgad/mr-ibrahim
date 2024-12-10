@@ -14,6 +14,7 @@ import Student from './Components/Student/Student';
 import LoginAssistant from './Components/Assistant/LoginAssistant';
 import LoginMr from './Components/Admin/LoginMr';
 import Cert from './Components/Admin/Cert';
+import Admin from './Components/Admin/Admin';
 import { Helmet } from 'react-helmet';
 import Navbar from './Components/Navbar/Navbar';
 import Layout from './Components/Layout/Layout';
@@ -55,6 +56,14 @@ function App() {
           element: (
             <ProdectRout>
               <Assistant />
+            </ProdectRout>
+          ),
+        },
+        {
+          path: "/admin",
+          element: (
+            <ProdectRout>
+              <Admin />
             </ProdectRout>
           ),
         },
