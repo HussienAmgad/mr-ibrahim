@@ -6,13 +6,11 @@ export default function LoginAssistant() {
   const navigate = useNavigate(); // تعريف useNavigate
 
   async function Login(information) {
-    console.log("Hello", information);
     try {
       const { data } = await axios.post('https://mr-ibrahim-server.vercel.app/Loginassistant', information);
-      console.log("Response data:", data);
       localStorage.setItem('userToken', data.token);
       setTimeout(() => {
-        navigate("/assistant");
+        window.location.reload(); // يقوم بتحديث الصفحة عند الضغط على الزر
       }, 2000);
     } catch (error) {
       const errorMessage = error.response?.data?.message || "Login failed!";

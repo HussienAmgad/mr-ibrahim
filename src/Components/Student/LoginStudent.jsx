@@ -6,10 +6,8 @@ export default function LoginStudent() {
   const navigate = useNavigate(); // تعريف useNavigate
 
   async function Login(information) {
-    console.log("Hello", information);
     try {
       const { data } = await axios.post('https://mr-ibrahim-server.vercel.app/loginstudent', information);
-      console.log("Response data:", data);
       localStorage.setItem('userToken', data.token);
       localStorage.setItem('Data', JSON.stringify(data));
       setTimeout(() => {

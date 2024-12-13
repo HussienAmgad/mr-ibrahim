@@ -52,6 +52,11 @@ export default function Assistant() {
   const toggleGradeDropdown = () => setIsGradeOpen(!isGradeOpen);
   const toggleCenterDropdown = () => setIsCenterOpen(!isCenterOpen);
 
+  function Editestudent(student) {
+    navigate("/editstudent", { state: { student } });
+  }
+  
+
   return (
     <div className="relative overflow-x-auto shadow-lg bg-white dark:bg-gray-900 h-full">
       {error && <div className="text-red-500 p-4">{error}</div>}
@@ -119,7 +124,7 @@ export default function Assistant() {
                   <span className="px-2 py-1 text-xs font-semibold text-yellow-800 bg-yellow-200 rounded-full">{student.phonestudent}</span>
                 </td>
                 <td className="px-6 py-4">
-                  <a href="" className="px-2 py-1 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full">Edit</a>
+                  <button onClick={()=>Editestudent(student)} className="px-2 py-1 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full">Edit</button>
                 </td>
               </tr>
             ))

@@ -23,7 +23,6 @@ export default function Prep() {
       const combinedData = [...data1, ...data2, ...data3].sort((a, b) => new Date(b.date) - new Date(a.date));
 
       setStudents(combinedData);
-      console.log(combinedData);
     } catch (error) {
       setError("هناك خطأ في جلب البيانات");
     }
@@ -125,7 +124,7 @@ export default function Prep() {
           {filterByGradeAndCenter().length > 0 ? (
             filterByGradeAndCenter().map((student) => (
               <tr key={student.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-900 transition-all">
-                <td className="px-6 py-4">
+                <td className="px-6 py-4 text-black dark:text-white">
                   {new Date(student.date).toLocaleString("ar-EG", {
                     dateStyle: "full",
                     timeStyle: "short",

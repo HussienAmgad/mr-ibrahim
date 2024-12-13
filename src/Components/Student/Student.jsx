@@ -50,7 +50,7 @@ export default function Student() {
 
   const handleClearStorage = () => {
     localStorage.clear();
-    navigate("/");
+    window.location.reload(); // يقوم بتحديث الصفحة عند الضغط على الزر
   };
 
   return (
@@ -61,13 +61,19 @@ export default function Student() {
         {userData ? (
           <div className="bg-gray-100 p-4 rounded-lg shadow-md mb-4 text-center">
             <p className="text-lg font-medium text-gray-700">
-              User ID: <span className="text-blue-500">{userData.id}</span>
-            </p>
-            <p className="text-lg font-medium text-gray-700">
               Name: <span className="text-blue-500">{userData.name || "Name not available"}</span>
             </p>
             <p className="text-lg font-medium text-gray-700">
               Grade: <span className="text-blue-500">{userData.grade || "Grade not available"}</span>
+            </p>
+            <p className="text-lg font-medium text-gray-700">
+              Center: <span className="text-blue-500">{userData.center || "Grade not available"}</span>
+            </p>
+            <p className="text-lg font-medium text-gray-700">
+              Phone Parent: <span className="text-blue-500">{userData.phoneparent || "Grade not available"}</span>
+            </p>
+            <p className="text-lg font-medium text-gray-700">
+              Phone Student: <span className="text-blue-500">{userData.phonestudent || "Grade not available"}</span>
             </p>
           </div>
         ) : (

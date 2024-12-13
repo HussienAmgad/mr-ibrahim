@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 
 export default function Edit() {
     const [students, setStudents] = useState([]);
@@ -13,9 +14,10 @@ export default function Edit() {
     const [selectedCenter, setSelectedCenter] = useState(null);
     const location = useLocation();
     const data = location.state?.data; // Receiving data from the previous component
+    const [Name, setName] = useState(null);
+
 
     useEffect(() => {
-        console.log(data);
         setCenter(data.center)
         if (data) {
             if (data.grade === "الصف الثالث الثانوي") {
@@ -68,6 +70,7 @@ export default function Edit() {
             date: data.date,
             grade: data.grade,
             center: data.center,
+            modified: Name,
             students: filteredStudents,
         };
 
@@ -90,6 +93,17 @@ export default function Edit() {
             if (student.Attendance) {
                 total += 1;
             }
+        }
+        const token = localStorage.getItem("userToken");
+        if (token) {
+            try {
+                const decodedToken = jwtDecode(token);
+                setName(decodedToken.name);
+            } catch (error) {
+                console.error("Error decoding token:", error.message);
+            }
+        } else {
+            null
         }
         setAttendance(total);
     }

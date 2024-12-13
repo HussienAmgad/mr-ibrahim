@@ -13,7 +13,6 @@ export default function ProdectRout2({ children }) {
         try {
           // فك التوكن
           const decodedToken = jwtDecode(token);
-          console.log(decodedToken);
           if (decodedToken.statues === "user") {
             return <Navigate to={"/student"} />;
         } else if (decodedToken.statues === "assist") {

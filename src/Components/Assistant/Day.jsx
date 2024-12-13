@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import { Formik, Form } from 'formik';
+import { jwtDecode } from 'jwt-decode';
 
 export default function Day() {
     const [students, setStudents] = useState([]);
@@ -12,6 +13,7 @@ export default function Day() {
     const [isCenterOpen, setIsCenterOpen] = useState(false);
     const [selectedGrade, setSelectedGrade] = useState(null);
     const [selectedCenter, setSelectedCenter] = useState(null);
+    const [Name, setName] = useState(null);
 
     const fetchData = async () => {
         try {
@@ -80,6 +82,7 @@ export default function Day() {
             grade: selectedGrade,
             center: selectedCenter,
             attendance: attendance,
+            name: Name,
             students: filteredStudents,
         };
 
@@ -102,6 +105,17 @@ export default function Day() {
                 total += 1;
             }
         }
+        const token = localStorage.getItem("userToken");
+        if (token) {
+            try {
+                const decodedToken = jwtDecode(token);
+                setName(decodedToken.name);
+            } catch (error) {
+                console.error("Error decoding token:", error.message);
+            }
+        } else {
+            null
+        }
         setAttendance(total);
         setProfit(attendance * 30);
     }
@@ -118,7 +132,6 @@ export default function Day() {
             <table className="min-w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <caption className="p-5 text-lg font-semibold text-gray-900 bg-white dark:text-white dark:bg-gray-800 border-b">
                     <div className='flex justify-between items-center'>
-                        <NavLink to="/addstudent" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">إضافة طالب</NavLink>
 
                         <Formik
                             initialValues={{ students: filterByGradeAndCenter() }}
@@ -136,12 +149,7 @@ export default function Day() {
                                 </Form>
                             )}
                         </Formik>
-                        <NavLink
-                            to="/"
-                            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                        >
-                            الرجوع الي الطلاب
-                        </NavLink>
+
 
                         <span>قائمة الطلاب</span>
 

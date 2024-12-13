@@ -30,7 +30,7 @@ export default function Layout() {
   }, []);
   return (
     <div>
-      {userData ? <Navbar /> : null}
+      <Navbar />
       <Outlet />
     </div>
   )

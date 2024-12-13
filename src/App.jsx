@@ -15,9 +15,10 @@ import LoginAssistant from './Components/Assistant/LoginAssistant';
 import LoginMr from './Components/Admin/LoginMr';
 import Cert from './Components/Admin/Cert';
 import Admin from './Components/Admin/Admin';
+import Charts from './Components/Admin/Charts';
 import { Helmet } from 'react-helmet';
-import Navbar from './Components/Navbar/Navbar';
 import Layout from './Components/Layout/Layout';
+import Editstudent from './Components/Assistant/Editstudent';
 
 function App() {
   const routers = createBrowserRouter([
@@ -68,10 +69,26 @@ function App() {
           ),
         },
         {
+          path: "/charts",
+          element: (
+            <ProdectRout>
+              <Charts />
+            </ProdectRout>
+          ),
+        },
+        {
           path: "/addstudent",
           element: (
             <ProdectRout>
               <Addstudent />
+            </ProdectRout>
+          ),
+        },
+        {
+          path: "/editstudent",
+          element: (
+            <ProdectRout>
+              <Editstudent />
             </ProdectRout>
           ),
         },
