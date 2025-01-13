@@ -70,7 +70,7 @@ export default function Prep() {
   
       if (data) {
         // قم بتوجيه المستخدم إلى صفحة التعديل مع تمرير البيانات المطلوبة
-        navigate("/editstudent", { state: { data } });
+        navigate("/editday", { state: { data } });
       }
     } catch (error) {
       console.error("Error:", error);
