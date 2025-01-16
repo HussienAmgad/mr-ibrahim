@@ -1,4 +1,5 @@
 import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Assistant from './Components/Assistant/Assistant';
 import Addstudent from './Components/Assistant/Addstudent';
@@ -13,7 +14,6 @@ import LoginStudent from './Components/Student/LoginStudent';
 import Student from './Components/Student/Student';
 import LoginAssistant from './Components/Assistant/LoginAssistant';
 import LoginMr from './Components/Admin/LoginMr';
-import Cert from './Components/Admin/Cert';
 import Admin from './Components/Admin/Admin';
 import Charts from './Components/Admin/Charts';
 import { Helmet } from 'react-helmet';
@@ -117,12 +117,6 @@ function App() {
           ),
         },
         {
-          path: "/cert",
-          element: (
-            <Cert />
-          ),
-        },
-        {
           path: "/oneday",
           element: (
             <ProdectRout>
@@ -146,13 +140,13 @@ function App() {
   return (
     <>
       <div>
-      <RouterProvider router={routers} />
+        <RouterProvider router={routers} />
         <Helmet>
           <title>موقع مستر إبراهيم زيدان</title> {/* العنوان الذي يظهر في التبويب */}
           <meta property="og:site_name" content="موقع مستر إبراهيم زيدان" />
           <link rel="icon" type="image/png" href="/public/icon512_rounded.png" /> {/* استبدل الرابط بالرابط الخاص بالصورة */}
           <meta name="description" content="موقع مستر إبراهيم زيدان يقدم محتوى مميز في مختلف المجالات." /> {/* الوصف الذي يظهر في محركات البحث */}
-          <meta name="robots" content="index, follow"/>
+          <meta name="robots" content="index, follow" />
           <meta name="keywords" content="Mr ibrahem, Mr ibrahim, مستر ابراهيم, مستر ابراهيم زيدان, ابراهيم زيدان, موقع مستر ابراهيم زيدان, موقع ابراهيم زيدان" /> {/* الكلمات المفتاحية */}
           <meta name="keywords" content=" مستر ابراهيم, مستر ابراهيم زيدان, ابراهيم زيدان, موقع مستر ابراهيم زيدان, موقع ابراهيم زيدان" /> {/* الكلمات المفتاحية */}
           <meta name="keywords" content="إبراهيم زيدان, مستر ابراهيم" /> {/* الكلمات المفتاحية */}

@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode"; // تأكد من أن المكتبة تستخدم export named
 import check from '../../assets/check.png';
 import fail from '../../assets/failed.png';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Student() {
   const [userData, setUserData] = useState(null);

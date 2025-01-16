@@ -1,34 +1,52 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { FaSpinner } from 'react-icons/fa';
 
 export default function Admin() {
-  let [assist, setAssist] = useState(null);
-  let [admin, setAdmin] = useState(null);
-  let [error, setError] = useState(null);
-  let [editIndex, setEditIndex] = useState(null);
-  let [editIndexadmin, setEditIndexadmin] = useState(null);
-  let [editedData, setEditedData] = useState({});
-  let [editedDataadmin, setEditedDataadmin] = useState({});
-  let [newAssistData, setNewAssistData] = useState({ name: '', password: '', statues: '', username: '' });
+  const [assist, setAssist] = useState(null);
+  const [admin, setAdmin] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [editIndex, setEditIndex] = useState(null);
+  const [editIndexadmin, setEditIndexadmin] = useState(null);
+  const [editedData, setEditedData] = useState({});
+  const [editedDataadmin, setEditedDataadmin] = useState({});
+  const [newAssistData, setNewAssistData] = useState({ name: '', password: '', statues: '', username: '' });
 
   useEffect(() => {
+    setLoading(true);
+
     axios.post('https://mr-ibrahim-server.vercel.app/detailsassist')
       .then(response => {
         setAssist(response.data);
-        console.log(response.data);
+        setLoading(false);  // Stop loading
       })
       .catch(error => {
         setError(error);
+        setLoading(false);
+        toast.error('Error fetching assist data');
       });
+
     axios.post('https://mr-ibrahim-server.vercel.app/detailsadmin')
       .then(response => {
         setAdmin(response.data);
-        console.log(response.data);
       })
       .catch(error => {
         setError(error);
+        toast.error('Error fetching admin data');
       });
   }, []);
+
+  if (loading) {
+    return (
+      <div className="text-center">
+        <FaSpinner className="animate-spin text-3xl text-blue-500" />
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   if (error) {
     return <div className="text-red-500 text-center">Error: {error.message}</div>;
@@ -40,13 +58,14 @@ export default function Admin() {
     setAssist(updatedAssist);
     setEditIndex(null);
     setEditedData({});
+
     const updatedItem = updatedAssist[index];
     axios.put(`https://mr-ibrahim-server.vercel.app/updateassist/${updatedItem.name}`, updatedItem)
       .then(response => {
-        console.log("Item updated successfully:", response.data);
+        toast.success('Item updated successfully');
       })
       .catch(error => {
-        console.log("Error updating item:", error);
+        toast.error('Error updating item');
       });
   };
 
@@ -56,13 +75,14 @@ export default function Admin() {
     setAdmin(updatedadmin);
     setEditIndexadmin(null);
     setEditedDataadmin({});
+
     const updatedItem = updatedadmin[index];
     axios.put(`https://mr-ibrahim-server.vercel.app/updateadmin/${updatedItem.name}`, updatedItem)
       .then(response => {
-        console.log("Item updated successfully:", response.data);
+        toast.success('Admin updated successfully');
       })
       .catch(error => {
-        console.log("Error updating item:", error);
+        toast.error('Error updating admin');
       });
   };
 
@@ -71,9 +91,22 @@ export default function Admin() {
       .then(response => {
         setAssist([...assist, response.data]);
         setNewAssistData({ name: '', password: '', statues: 'assist', username: '' });
+        toast.success('New assist added successfully');
       })
       .catch(error => {
-        console.log('Error adding new assist:', error);
+        toast.error('Error adding new assist');
+      });
+  };
+
+  const handleAddAdmin = () => {
+    axios.post('https://mr-ibrahim-server.vercel.app/addadmin', newAssistData)
+      .then(response => {
+        setAdmin([...admin, response.data]);
+        setNewAssistData({ name: '', password: '', statues: 'admin', username: '' });
+        toast.success('New admin added successfully');
+      })
+      .catch(error => {
+        toast.error('Error adding new admin');
       });
   };
 
@@ -81,10 +114,21 @@ export default function Admin() {
     axios.delete(`https://mr-ibrahim-server.vercel.app/deleteassist/${name}`)
       .then(response => {
         setAssist(assist.filter(item => item.name !== name));
-        console.log("Item deleted successfully:", response.data);
+        toast.success('Item deleted successfully');
       })
       .catch(error => {
-        console.log("Error deleting item:", error);
+        toast.error('Error deleting item');
+      });
+  };
+
+  const handleDeleteAdmin = (name) => {
+    axios.delete(`https://mr-ibrahim-server.vercel.app/deleteadmin/${name}`)
+      .then(response => {
+        setAdmin(admin.filter(item => item.name !== name));
+        toast.success('Admin deleted successfully');
+      })
+      .catch(error => {
+        toast.error('Error deleting admin');
       });
   };
 
@@ -95,14 +139,15 @@ export default function Admin() {
   const handleInputChangeadmin = (e, field) => {
     setEditedDataadmin({ ...editedDataadmin, [field]: e.target.value });
   };
-  
+
   const handleNewInputChange = (e, field) => {
     setNewAssistData({ ...newAssistData, [field]: e.target.value });
   };
 
   return (
     <>
-      <h1 className='text-center text-3xl font-bold mb-6 text-gray-800'>Account Assist</h1>
+      <ToastContainer />
+      <h1 className="text-center text-2xl font-bold mb-6">Account Assist</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {assist && assist.map((item, index) => (
           <div key={index} className="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white transform transition-all hover:scale-105 hover:shadow-xl p-6">
@@ -120,7 +165,7 @@ export default function Admin() {
                 )}
               </h2>
               <p className="text-gray-600 text-base mb-2">
-                Password :
+                Password:
                 {editIndex === index ? (
                   <input
                     type="text"
@@ -133,7 +178,7 @@ export default function Admin() {
                 )}
               </p>
               <p className="text-gray-600 text-base mb-2">
-                Statues :
+                Statues:
                 {editIndex === index ? (
                   <input
                     type="text"
@@ -146,7 +191,7 @@ export default function Admin() {
                 )}
               </p>
               <p className="text-gray-600 text-base">
-                Username :
+                Username:
                 {editIndex === index ? (
                   <input
                     type="text"
@@ -211,7 +256,7 @@ export default function Admin() {
               />
               <button
                 onClick={handleAddAssist}
-                className="bg-green-500 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:bg-green-600 transition-all w-full"
+                className="bg-green-500 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:bg-green-600 transition-all"
               >
                 Add Assist
               </button>
@@ -220,7 +265,8 @@ export default function Admin() {
         </div>
       </div>
 
-      <h1 className='text-center text-3xl font-bold mb-6 text-gray-800'>Account Admin</h1>
+
+      <h1 className="text-center text-2xl font-bold mb-6 mt-10">Account Admin</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {admin && admin.map((item, index) => (
           <div key={index} className="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white transform transition-all hover:scale-105 hover:shadow-xl p-6">
@@ -250,7 +296,7 @@ export default function Admin() {
                   item.password
                 )}
               </p>
-              <p className="text-gray-600 text-base">
+              <p className="text-gray-600 text-base mb-2">
                 Statues :
                 {editIndexadmin === index ? (
                   <input
@@ -261,6 +307,19 @@ export default function Admin() {
                   />
                 ) : (
                   item.statues
+                )}
+              </p>
+              <p className="text-gray-600 text-base">
+                Username :
+                {editIndexadmin === index ? (
+                  <input
+                    type="text"
+                    value={editedDataadmin.username || item.username}
+                    onChange={(e) => handleInputChangeadmin(e, 'username')}
+                    className="border border-gray-300 rounded p-2 w-full"
+                  />
+                ) : (
+                  item.username
                 )}
               </p>
             </div>
@@ -280,10 +339,17 @@ export default function Admin() {
                   Edit
                 </button>
               )}
+              <button
+                onClick={() => handleDeleteAdmin(item.name)}
+                className="bg-red-500 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:bg-red-600 transition-all ml-2"
+              >
+                Delete
+              </button>
             </div>
           </div>
         ))}
       </div>
+
     </>
   );
 }

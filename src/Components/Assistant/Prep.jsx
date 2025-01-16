@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // استيراد مكتبة التوست
+import '../../loader.css';
+
 
 export default function Prep() {
   const [students, setStudents] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false); // متغير الloading
   const [isGradeOpen, setIsGradeOpen] = useState(false);
   const [isCenterOpen, setIsCenterOpen] = useState(false);
   const [selectedGrade, setSelectedGrade] = useState(null);
@@ -11,6 +16,7 @@ export default function Prep() {
   const navigate = useNavigate();
 
   const fetchData = async () => {
+    setLoading(true); // بداية التحميل
     try {
       const response1 = await fetch('https://mr-ibrahim-server.vercel.app/showprep1');
       const data1 = await response1.json();
@@ -23,8 +29,12 @@ export default function Prep() {
       const combinedData = [...data1, ...data2, ...data3].sort((a, b) => new Date(b.date) - new Date(a.date));
 
       setStudents(combinedData);
+      setLoading(false); // إنهاء التحميل
+      toast.success("تم جلب البيانات")
     } catch (error) {
       setError("هناك خطأ في جلب البيانات");
+      setLoading(false); // إنهاء التحميل حتى في حالة الخطأ
+      toast.error('حدث خطأ في جلب البيانات'); // إظهار رسالة خطأ
     }
   };
 
@@ -33,6 +43,7 @@ export default function Prep() {
   }, []);
 
   async function open(id, grade, navigate) {
+    setLoading(true); // بداية التحميل
     let data;
     try {
       if (grade === "الصف الأول الثانوي") {
@@ -48,13 +59,18 @@ export default function Prep() {
 
       if (data) {
         navigate("/oneday", { state: { data } });
+        toast.success("تم فتح البيانات بنجاح");
       }
     } catch (error) {
       console.error("Error:", error);
+      toast.error('حدث خطأ أثناء فتح البيانات'); // إظهار رسالة خطأ
+    } finally {
+      setLoading(false); // إنهاء التحميل
     }
   }
 
   async function Edit(id, grade, navigate) {
+    setLoading(true); // بداية التحميل
     try {
       let data;
       if (grade === "الصف الأول الثانوي") {
@@ -71,12 +87,15 @@ export default function Prep() {
       if (data) {
         // قم بتوجيه المستخدم إلى صفحة التعديل مع تمرير البيانات المطلوبة
         navigate("/editday", { state: { data } });
+        toast.success("تم تعديل البيانات بنجاح");
       }
     } catch (error) {
       console.error("Error:", error);
+      toast.error('حدث خطأ أثناء تعديل البيانات'); // إظهار رسالة خطأ
+    } finally {
+      setLoading(false); // إنهاء التحميل
     }
   }
-  
 
   const filterByGradeAndCenter = () => {
     return students.filter(student => {
@@ -96,12 +115,11 @@ export default function Prep() {
     setIsCenterOpen(false);
   };
 
-  // const toggleGradeDropdown = () => setIsGradeOpen(!isGradeOpen);
-  // const toggleCenterDropdown = () => setIsCenterOpen(!isCenterOpen);
-
   return (
     <div className="relative overflow-x-auto shadow-xl bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 p-6">
+      <ToastContainer /> {/* مكون التوست */}
       {error && <div className="text-red-500 p-4 text-center">{error}</div>}
+      {loading && <div className="flex justify-center py-4"><span className="loader"></span></div>}
       <table className="min-w-full text-sm text-left text-gray-200 dark:text-gray-400 rounded-lg overflow-hidden shadow-lg">
         <caption className="p-5 text-2xl font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-md mb-4">
           <div className="flex justify-between items-center">
